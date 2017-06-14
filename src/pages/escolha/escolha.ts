@@ -21,9 +21,6 @@ export class EscolhaPage {
             new Acessorio('Freio ABS', 800),
             new Acessorio('Ar-Condicionado', 1000),
             new Acessorio('MP3 Player', 500)
-            //{ nome: 'Freio ABS' , preco : 800 },
-            //{ nome: 'Ar-Condicionado' , preco : 1000 },
-            //{ nome: 'MP3 Player' , preco : 500 }
         ];
 
     }
