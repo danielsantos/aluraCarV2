@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController, Alert } from 'ionic-angular'
 import { Carro } from '../../domain/carro/carro';
 import { Http } from '@angular/http';
 import { HomePage } from '../home/home';
+import { Agendamento } from '../../domain/agendamento/agendamento';
 
 @Component({
   templateUrl: 'cadastro.html'
@@ -12,10 +13,7 @@ export class CadastroPage {
   public carro: Carro;
   public precoTotal: number;
 
-  public nome: string;
-  public endereco: string;
-  public email: string;
-  public data: string = new Date().toISOString();
+  public agendamento: Agendamento;
 
   private _alert: Alert;
 
@@ -26,6 +24,8 @@ export class CadastroPage {
 
     this.carro = this.navParams.get('carro');
     this.precoTotal = this.navParams.get('precoTotal');
+
+    this.agendamento = new Agendamento(this.carro, this.precoTotal);
     
     this._alert = this._alertCtrl.create({
       title: 'Aviso',
@@ -37,7 +37,7 @@ export class CadastroPage {
   agenda() {
     
     this._http
-            .get(`https://aluracar.herokuapp.com/salvarpedido?carro=${this.carro.nome}&nome=${this.nome}&preco=${this.precoTotal}&endereco=${this.endereco}&email=${this.email}&dataAgendamento=${this.data}`)
+            .get(`https://aluracar.herokuapp.com/salvarpedido?carro=${this.agendamento.carro.nome}&nome=${this.agendamento.nome}&preco=${this.agendamento.valor}&endereco=${this.agendamento.endereco}&email=${this.agendamento.email}&dataAgendamento=${this.agendamento.data}`)
             .toPromise()
             .then(() => {
               this._alert.setSubTitle('Agendamento realizado com Sucesso!');
