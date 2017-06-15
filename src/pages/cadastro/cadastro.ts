@@ -35,6 +35,17 @@ export class CadastroPage {
   }
 
   agenda() {
+
+    if (!this.agendamento.nome || !this.agendamento.endereco || !this.agendamento.email ) {
+
+      this._alertCtrl.create({
+        title: 'Preenchimento Obrigatorio',
+        subTitle: 'Voce deve preencher todas as informacoes',
+        buttons: [{ text: 'Ok' }]
+      }).present();
+
+      return;
+    }
     
     this._http
             .get(`https://aluracar.herokuapp.com/salvarpedido?carro=${this.agendamento.carro.nome}&nome=${this.agendamento.nome}&preco=${this.agendamento.valor}&endereco=${this.agendamento.endereco}&email=${this.agendamento.email}&dataAgendamento=${this.agendamento.data}`)
