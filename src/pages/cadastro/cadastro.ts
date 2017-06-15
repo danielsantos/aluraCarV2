@@ -56,7 +56,11 @@ export class CadastroPage {
             this._alert.present();
 
         })
-        
+        .catch(err => {
+          this._alert.setSubTitle(err.message);
+          this._alert.present();
+        })
+
   }
 
 }
