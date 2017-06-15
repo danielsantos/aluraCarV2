@@ -5,6 +5,7 @@ import { HomePage } from '../pages/home/home';
 import { EscolhaPage } from '../pages/escolha/escolha';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { AgendamentoService } from '../domain/agendamento/agendamento-service';
+import { AgendamentoDao } from '../domain/agendamento/agendamento-dao';
 import { Storage } from '@ionic/storage';
 
 import 'rxjs/add/operator/map';
@@ -14,7 +15,7 @@ function provideStorage() {
 
   return new Storage(['indexeddb'], {
     name: 'aluracar', 
-    storageName: 'agendamentos' 
+    storeName: 'agendamentos' 
   });
 
 }
@@ -38,7 +39,7 @@ function provideStorage() {
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler }, 
-    AgendamentoService,
+    AgendamentoService, AgendamentoDao,
     { provide: Storage, useFactory: provideStorage }
   ]
 })
