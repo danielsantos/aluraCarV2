@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Alert } from 'ionic-angular';
 import { Carro } from '../../domain/carro/carro';
 import { Http } from '@angular/http';
+import { HomePage } from '../home/home';
 
 @Component({
   templateUrl: 'cadastro.html'
@@ -28,7 +29,7 @@ export class CadastroPage {
     
     this._alert = this._alertCtrl.create({
       title: 'Aviso',
-      buttons: [{ text: 'Ok'}]
+      buttons: [{ text: 'Ok', handler: () => this.navCtrl.setRoot(HomePage)}]
     });
 
   }
