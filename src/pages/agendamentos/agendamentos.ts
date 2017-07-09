@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AgendamentoDao } from '../../domain/agendamento/agendamento-dao';
 import { Agendamento } from '../../domain/agendamento/agendamento';
+import { AgendamentoService } from '../../domain/agendamento/agendamento-service';
 
 @Component({
+  selector: 'page-agendamentos',
   templateUrl: 'agendamentos.html'
 })
 export class AgendamentosPage {
@@ -13,7 +15,9 @@ export class AgendamentosPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private _dao : AgendamentoDao) {
+    private _dao : AgendamentoDao,
+    private _service : AgendamentoService,
+    private _alertCtrl: AlertController) {
 
       this._dao.
         listaTodos()
@@ -23,6 +27,34 @@ export class AgendamentosPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgendamentosPage');
+  }
+
+  reenvia(agendamento: Agendamento) {
+
+    this._service
+      .reagenda(agendamento)
+      .then(confirmado => {
+
+        confirmado 
+
+          ? this._alertCtrl.create({
+
+            title: 'Envio',
+            subTitle: 'Agendamento reenviado com Sucesso!',
+            buttons: [{ text: 'Ok' }]
+
+          }).present()
+
+          : this._alertCtrl.create({
+
+            title: 'Envio',
+            subTitle: 'Não foi possivel reenviar o agendamento. Tente outra vez',
+            buttons: [{ text: 'Ok' }]
+
+          }).present();
+
+      });
+
   }
 
 }
