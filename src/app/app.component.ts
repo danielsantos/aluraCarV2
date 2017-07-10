@@ -5,13 +5,14 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { HomePage } from '../pages/home/home';
 
 import { AgendamentosPage } from '../pages/agendamentos/agendamentos';
+import { LoginPage } from '../pages/login/login';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = HomePage;
+  rootPage = LoginPage;
 
   public paginas = [
     { titulo : 'Agendamentos', componente : AgendamentosPage }
